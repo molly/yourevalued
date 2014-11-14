@@ -31,6 +31,7 @@ data = {
                     '"nobody loves me"'],
         'responses': ['I like you.',
                       'You\'re valued.',
+                      'You matter.',
                       u'\u2764']
     }
 }
@@ -67,9 +68,12 @@ def filter_tweets(tweets, users):
             return
 
 def send_reply(api, type, tweet):
+    '''Send the reply tweet and record it.'''
+    f = open('tweeted_users.txt', 'a')
+    f.write(tweet.author.screen_name + '\n')
+    f.close()
     text = '@' + tweet.author.screen_name + ' ' + choice(data[type]['responses'])
-    print(text)
-    #api.update_status(text, in_reply_to_status_id = tweet.id_str)
+    api.update_status(text, in_reply_to_status_id = tweet.id_str)
 
 if __name__ == "__main__":
     auth = tweepy.OAuthHandler(C_KEY, C_SECRET)
