@@ -62,7 +62,7 @@ def filter_tweets(tweets, users):
     while True:
         tweet = tweets.pop(0)
         text = tweet.text
-        if not (any(substr in text for substr in filters) or tweet.author.screen_name in users):
+        if not (hasattr(tweet, "retweeted_status") or tweet.author.screen_name in users or any(substr in text for substr in filters)):
             return tweet
         if len(tweets) == 0:
             return
