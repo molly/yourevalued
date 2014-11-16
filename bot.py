@@ -25,6 +25,7 @@ import tweepy
 from secrets import *
 from random import choice
 import os
+import re
 
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 tweeted_file = os.path.join(__location__, "tweeted_users.txt")
@@ -45,7 +46,8 @@ filters = ['http',
            '-',
            '"',
            u'“',
-           u'”']
+           u'”',
+           'poor boy']
 
 
 def get_tweet(api_, type_):
@@ -72,7 +74,7 @@ def filter_tweets(tweets_, users_):
         if not (hasattr(tweet_, "retweeted_status") or
                 tweet_.in_reply_to_status_id or
                 tweet_.author.screen_name in users_ or
-                any(substr in text for substr in filters)):
+                any(substr in text.lower() for substr in filters)):
             return tweet_
 
 
