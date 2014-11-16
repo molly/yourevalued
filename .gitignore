@@ -54,3 +54,5 @@ docs/_build/
 target/
 
 secrets.py
+tweeted_users.txt
+.idea/
