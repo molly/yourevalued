@@ -24,6 +24,11 @@
 import tweepy
 from secrets import *
 from random import choice
+import os
+
+__location__ = os.path.realpath(
+    os.path.join(os.getcwd(), os.path.dirname(__file__)))
+tweeted_file = os.path.join(__location__, "tweeted_users.txt")
 
 data = {
     'like': {
@@ -52,7 +57,7 @@ def get_tweet(api, type):
 
 def get_users():
     '''Get a list of users we've already tweeted at.'''
-    f = open('tweeted_users.txt', 'r')
+    f = open(tweeted_file, 'r')
     users = [line.rstrip('\n') for line in f]
     return users
 
@@ -62,14 +67,14 @@ def filter_tweets(tweets, users):
     while True:
         tweet = tweets.pop(0)
         text = tweet.text
-        if not (hasattr(tweet, "retweeted_status") or tweet.author.screen_name in users or any(substr in text for substr in filters)):
+        if not (hasattr(tweet, "retweeted_status") or tweet.in_reply_to_status_id or tweet.author.screen_name in users or any(substr in text for substr in filters)):
             return tweet
         if len(tweets) == 0:
             return
 
 def send_reply(api, type, tweet):
     '''Send the reply tweet and record it.'''
-    f = open('tweeted_users.txt', 'a')
+    f = open(tweeted_file, 'a')
     f.write(tweet.author.screen_name + '\n')
     f.close()
     text = '@' + tweet.author.screen_name + ' ' + choice(data[type]['responses'])
