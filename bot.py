@@ -47,7 +47,11 @@ filters = ['http',
            '"',
            u'“',
            u'”',
-           'poor boy']
+           'poor boy',
+           'the way you do',
+           'hear it every day',
+           'but that\'s ok',
+           'but thats ok']
 
 
 def get_tweet(api_, type_):
