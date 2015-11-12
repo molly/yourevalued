@@ -52,7 +52,7 @@ filters = ['http',
            'hear it every day',
            'that\'s ok',
            'thats ok'
-           'ain\'t nobody loves me better than you']
+           'nobody loves me better']
 
 
 def get_tweet(api_, type_):
