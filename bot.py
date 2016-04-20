@@ -70,7 +70,7 @@ def filter_tweets(tweets_, users_):
         if not (hasattr(tweet_, "retweeted_status") or
                 tweet_.in_reply_to_status_id or
                 tweet_.author.screen_name in users_ or
-                filters.match(text) is not None
+                filters.match(text) is not None):
             return tweet_
 
 
