@@ -32,7 +32,9 @@ tweeted_file = os.path.join(__location__, "tweeted_users.txt")
 
 data = {'like':
             {'queries': ['"nobody likes me"',
-                         '"nobody loves me"'],
+                         '"nobody loves me"',
+                         '"no one likes me"',
+                         '"no one loves me"'],
              'responses': ['I like you.',
                            'You\'re valued.',
                            'You matter.',
@@ -40,20 +42,9 @@ data = {'like':
             }
         }
 
-filters = ['http',
-           '#nowplaying',
-           'youtube',
-           '-',
-           '"',
-           u'“',
-           u'”',
-           'poor boy',
-           'the way you do',
-           'hear it every day',
-           'that\'s ok',
-           'thats ok'
-           'nobody loves me better']
-
+filters = re.compile(
+  """(http|#nowplaying|youtube|-|"|“|”|poor boy|the way you do|hear it every ?day|that\'?s ok'|loves me better|23)""",
+  re.IGNORECASE)
 
 def get_tweet(api_, type_):
     """Get a list of tweets matching the search query."""
@@ -79,7 +70,7 @@ def filter_tweets(tweets_, users_):
         if not (hasattr(tweet_, "retweeted_status") or
                 tweet_.in_reply_to_status_id or
                 tweet_.author.screen_name in users_ or
-                any(substr in text.lower() for substr in filters)):
+                filters.match(text) is not None
             return tweet_
 
 
