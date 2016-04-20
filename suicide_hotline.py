@@ -30,9 +30,9 @@ __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file
 
 tweets = [
   "Please ask for help if you need it.\n\nNational Suicide Prevention Lifeline: 1-800-273-8255",
-  "National Suicide Prevention Lifeline: 1-800-273-8255\n\nCrisis Text Line: Text START to 741-741\n\nInternational Support: http://www.suicide.org/international-suicide-hotlines.html",
+  "National Suicide Prevention Lifeline: 1-800-273-8255\n\nCrisis Text Line: Text START to 741-741\n\nInternational Support: goo.gl/it8lNF",
   "If you or someone you know needs help, or just needs to talk, please call the National Suicide Prevention Lifeline at 1-800-273-8255",
-  "If you or someone you know is thinking about suicide, or dealing with a suicide loss, call the National Suicide Prevention Lifeline at 1-800-273-8255"
+  "If you or someone you know is thinking about suicide, call the National Suicide Prevention Lifeline at 1-800-273-8255"
 ]
 
 if __name__ == "__main__":
