@@ -23,7 +23,7 @@
 
 import tweepy
 from secrets import *
-from random import choice
+import random
 import os
 
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
@@ -37,8 +37,9 @@ tweets = [
 
 if __name__ == "__main__":
     """Tweet one of several suicide hotline messages."""
-    auth = tweepy.OAuthHandler(C_KEY, C_SECRET)
-    auth.set_access_token(A_TOKEN, A_TOKEN_SECRET)
-    api = tweepy.API(auth)
+    if random.randint(0, 5) == 0:
+      auth = tweepy.OAuthHandler(C_KEY, C_SECRET)
+      auth.set_access_token(A_TOKEN, A_TOKEN_SECRET)
+      api = tweepy.API(auth)
 
-    api.update_status(choice(tweets))
+      api.update_status(random.choice(tweets))
